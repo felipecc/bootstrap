@@ -1,0 +1,42 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure                    {:mvn/version "1.10.3"}
+        com.stuartsierra/component             {:mvn/version "1.0.0"}
+        org.clojure/tools.namespace            {:mvn/version "1.1.0"}
+        com.layerware/hugsql                   {:mvn/version "0.5.1"}
+        com.layerware/hugsql-adapter           {:mvn/version "0.5.1"}
+        com.layerware/hugsql-core              {:mvn/version "0.5.1"}
+        com.layerware/hugsql-adapter-next-jdbc {:mvn/version "0.5.1"}
+        org.postgresql/postgresql              {:mvn/version "42.2.24"}
+        com.github.seancorfield/next.jdbc      {:mvn/version "1.2.709"}
+        org.slf4j/slf4j-simple                 {:mvn/version "1.7.28"}
+        cprop/cprop                            {:mvn/version "0.1.19"}
+        org.clojure/java.classpath             {:mvn/version "1.0.0"}
+        org.clojure/data.json                  {:mvn/version "0.2.6"}
+        com.zaxxer/HikariCP                    {:mvn/version "3.4.5"}
+        cheshire/cheshire                      {:mvn/version "5.10.1"}
+        metosin/reitit                         {:mvn/version "0.5.15"}
+        metosin/reitit-pedestal                {:mvn/version "0.5.15"}
+        metosin/muuntaja                       {:mvn/version "0.6.8"}
+        io.pedestal/pedestal.service           {:mvn/version "0.5.7"}
+        io.pedestal/pedestal.route             {:mvn/version "0.5.7"}
+        io.pedestal/pedestal.jetty             {:mvn/version "0.5.7"}
+        metosin/malli                          {:mvn/version "0.6.2"}
+        reloaded.repl/reloaded.repl            {:mvn/version "0.2.4"}}
+ :aliases
+ {:dev {:extra-paths ["dev"]}
+  :test
+  {:extra-paths ["test"]
+   :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
+                io.github.cognitect-labs/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
+   :exec-fn cognitect.test-runner.api/test}
+  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.267"}}
+        :exec-fn hf.depstar/jar
+        :exec-args {:jar "bootstrap.jar" :sync-pom true}}
+  :install {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
+            :exec-fn deps-deploy.deps-deploy/deploy
+            :exec-args {:installer :local :artifact "bootstrap.jar"}}
+  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
+           :exec-fn deps-deploy.deps-deploy/deploy
+           :exec-args {:installer :remote :artifact "bootstrap.jar"}}}}
