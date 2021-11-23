@@ -13,3 +13,12 @@
 /.socket-repl-port
 .hgignore
 .hg/
+/clj-kondo
+**/.clj-kondo/.cache
+performance.txt
+clj-kondo*.snap
+.planck_cache
+/.clj-kondo/clj-kondo
+/.lsp/
+clj-kondo.build_artifacts.txt
+/.clj-kondo/rewrite-clj
